@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKCs Inventory</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1d1d1d;
+      color: #fff;
+    }
+    h1 {
+      color: #9b30ff; /* Neon Purple */
+    }
+    button {
+      background-color: #00bfff; /* Electric Blue */
+      color: #fff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #008bb0;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SKCs Inventory System</h1>
+
+  <h2>Inventory</h2>
+  <button onclick="loadInventory()">Load Inventory</button>
+  <ul id="inventory-list"></ul>
+
+  <h2>Sales</h2>
+  <input id="product-id" placeholder="Product ID" />
+  <input id="quantity-sold" placeholder="Quantity Sold" />
+  <input id="sale-price" placeholder="Sale Price" />
+  <input id="customer-name" placeholder="Customer Name" />
+  <button onclick="addSale()">Record Sale</button>
+
+  <h2>Debtors</h2>
+  <input id="debtor-name" placeholder="Customer Name" />
+  <input id="amount-owed" placeholder="Amount Owed" />
+  <input id="due-date" type="date" />
+  <button onclick="addDebtor()">Add Debtor</button>
+
+  <h2>Capital</h2>
+  <input id="capital-amount" placeholder="Capital Amount" />
+  <button onclick="addCapital()">Add Capital</button>
+
+  <script>
+    async function loadInventory() {
+      const res = await fetch('/api/inventory');
+      const data = await res.json();
+      const list = document.getElementById('inventory-list');
+      list.innerHTML = '';
+      data.forEach(item => {
+        list.innerHTML += `<li>${item.name} - ${item.quantity} in stock @ ${item.price} TZS</li>`;
+      });
+    }
+
+    async function addSale() {
+      const productId = document.getElementById('product-id').value;
+      const quantitySold = document.getElementById('quantity-sold').value;
+      const salePrice = document.getElementById('sale-price').value;
+      const customerName = document.getElementById('customer-name').value;
+      const res = await fetch('/api/sales', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, quantitySold, salePrice, customerName })
+      });
+      const data = await res.json();
+      alert(data.message);
+      loadInventory();
+    }
+
+    async function addDebtor() {
+      const debtorName = document.getElementById('debtor-name').value;
+      const amountOwed = document.getElementById('amount-owed').value;
+      const dueDate = document.getElementById('due-date').value;
+      const res = await fetch('/api/debtors', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ debtorName, amountOwed, dueDate })
+      });
+      const data = await res.json();
+      alert(data.message);
+    }
+
+    async function addCapital() {
+      const capitalAmount = document.getElementById('capital-amount').value;
+      const res = await fetch('/api/capital', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: capitalAmount })
+      });
+      const data = await res.json();
+      alert(data.message);
+    }
+  </script>
+
+</body>
+</html>
