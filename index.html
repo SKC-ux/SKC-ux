@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SKCs Inventory System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1d1d1d;
+      color: #fff;
+      padding: 20px;
+      margin: 0;
+    }
+    h1 {
+      color: #9b30ff; /* Neon Purple */
+      text-align: center;
+    }
+    button {
+      background-color: #00bfff; /* Electric Blue */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin: 10px 0;
+    }
+    button:hover {
+      background-color: #008bb0;
+    }
+    input {
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    h2 {
+      color: #9b30ff;
+    }
+    #inventory-list, #sales-list, #debtors-list, #capital-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background-color: #333;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      input, button {
+        width: 100%;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SKCs Inventory System</h1>
+
+  <div>
+    <h2>Place an Order</h2>
+    <select id="product-select"></select>
+    <input id="order-quantity" placeholder="Quantity" />
+    <input id="customer-name" placeholder="Your Name" />
+    <input id="customer-contact" placeholder="Your Contact (Phone)" />
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+
+  <div>
+    <h2>Products</h2>
+    <button onclick="loadInventory()">Load Inventory</button>
+    <ul id="inventory-list"></ul>
+  </div>
+
+  <div>
+    <h2>Sales</h2>
+    <input id="product-id" placeholder="Product ID" />
+    <input id="quantity-sold" placeholder="Quantity Sold" />
+    <input id="sale-price" placeholder="Sale Price" />
+    <input id="customer-name-sale" placeholder="Customer Name" />
+    <button onclick="addSale()">Record Sale</button>
+    <ul id="sales-list"></ul>
+  </div>
+
+  <div>
+    <h2>Debtors</h2>
+    <input id="debtor-name" placeholder="Customer Name" />
+    <input id="amount-owed" placeholder="Amount Owed" />
+    <input id="due-date" type="date" />
+    <button onclick="addDebtor()">Add Debtor</button>
+    <ul id="debtors-list"></ul>
+  </div>
+
+  <div>
+    <h2>Capital</h2>
+    <input id="capital-amount" placeholder="Capital Amount" />
+    <button onclick="addCapital()">Add Capital</button>
+    <ul id="capital-list"></ul>
+  </div>
+
+  <div>
+    <h2>Payment Info</h2>
+    <p>Pay via M-Pesa: <strong>+254 700 000 000</strong></p>
+  </div>
+
+  <script>
+    // Add the functions for placing orders, adding sales, debtors, and capital below
+  </script>
+
+</body>
+</html>
